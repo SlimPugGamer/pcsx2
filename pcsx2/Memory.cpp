@@ -341,12 +341,6 @@ void ba0W16(u32 mem, u16 value)
 		}
 		else if (s_ba[masked_mem] & 0x80) // Start executing
 		{
-			if (s_ba[0x2] == 0x44) // Read Mode?
-			{
-				if (s_ba[0x2] == 0x44)
-					s_ba[0x2] = 0x42;
-			}
-
 			if (s_ba[0x2] == 0x43) // Write Mode
 			{
 				int size = (s_ba[masked_mem] & 0xF);
@@ -362,7 +356,7 @@ void ba0W16(u32 mem, u16 value)
 				s_ba_command_executing = true;
 				s_ba_error_detected = false;
 			}
-			else if (s_ba[0x2] == 0x42) // Read Mode
+			else if (s_ba[0x2] == 0x42 || s_ba[0x2] == 0x44) // Read Mode
 			{
 				int size = (s_ba[masked_mem] & 0xF);
 
